@@ -9,11 +9,23 @@ AMovingPlatform::AMovingPlatform()
 	SetMobility(EComponentMobility::Movable); //컴포넌트를 움직일 수 있게 만들거다.
 }
 
+void AMovingPlatform::BeginPlay()
+{
+	Super::BeginPlay(); //이걸 실행하지 않으면 BluePrint가 호출되지 않기 때문이다.
+
+	if (HasAuthority())
+	{
+
+		SetReplicates(true);
+		SetReplicateMovement(true);
+	}
+}
+
 void AMovingPlatform::Tick(float DeltaTime)
 {
 	//정적 메서드로 Super Tick이 없다.
 	Super::Tick(DeltaTime);
-	if (HasAuthority())
+	if (HasAuthority()) //Not on Server == client
 	{
 		//우리가 하고 싶은 것은 Actor 위치를 얻는 것이다. 
 		//FVector유형이 될 변수에 저장한다.
