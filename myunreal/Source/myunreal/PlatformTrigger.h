@@ -27,7 +27,10 @@ private:
 	UPROPERTY(VisibleAnywhere)
 	class UBoxComponent* TriggerVolume; //editanywhere 하면 포인터를 편집한다는 것이기 때문에 안됨
 	
-										/** 무언가가 구체 컴포넌트에 들어설 때 호출 */
+	UPROPERTY(EditAnywhere)
+	TArray<class AMovingPlatform*> PlatformToTrigger;
+
+	/** 무언가가 구체 컴포넌트에 들어설 때 호출 */
 	UFUNCTION()
 	void OnOverlapBegin(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 

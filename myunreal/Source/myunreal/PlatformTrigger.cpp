@@ -3,6 +3,7 @@
 
 #include "PlatformTrigger.h"
 #include "Components/BoxComponent.h"
+#include "MovingPlatform.h"
 
 // Sets default values
 APlatformTrigger::APlatformTrigger()
@@ -38,10 +39,19 @@ void APlatformTrigger::Tick(float DeltaTime)
 void APlatformTrigger::OnOverlapBegin(UPrimitiveComponent * OverlappedComp, AActor * OtherActor, UPrimitiveComponent * OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult & SweepResult)
 {
 	UE_LOG(LogTemp, Warning, TEXT("Activated"));
+	// 정수의 Tarray를 가지고 있다면, 그게 정수 포인터의 Tarray가 되진 않는다.
+	for (AMovingPlatform* platform : PlatformToTrigger)
+	{
+		platform->AddActiveTrigger();
+	}
 }
 
 void APlatformTrigger::OnOverlapEnd(UPrimitiveComponent * OverlappedComp, AActor * OtherActor, UPrimitiveComponent * OtherComp, int32 OtherBodyIndex)
 {
 	UE_LOG(LogTemp, Warning, TEXT("UnActivated"));
+	for (AMovingPlatform* platform : PlatformToTrigger)
+	{
+		platform->RemoveActiveTrigger();
+	}
 }
 
