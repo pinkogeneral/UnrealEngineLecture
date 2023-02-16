@@ -38,7 +38,7 @@ Tick은 양쪽에서 호출되며, 실제로 클라이언트에서 SetReplicates
 - ISP가 라우터네 인터넷 어디에서나 연결할 수 있는 글로벌 ip주소와 ip주소만 제공하게 한다는 것이다.
 - 네트워크 주소 변환(NAT) 외부로 나가는 연결을 만드는 장치 없이는 글로벌 네트워크는 특정장치로 이동이 불가능하다.
 
-"C:\Program Files\Epic Games\UE_4.26\Engine\Binaries\Win64\UE4Editor.exe" "C:\UnrealEngine\UnrealEngineLecture\myunreal\myunreal.uproject"
+"C:\Program Files\Epic Games\UE_4.26\Engine\Binaries\Win64\UE4Editor.exe" "C:\UnrealEngine\UnrealEngineLecture\myunreal\myunreal.uproject" -ga
 
 
 14. 
@@ -72,3 +72,16 @@ playcontroller
 게임 모드 
 게임 인스턴스 
 gEngine 엔진 객체의 포인터 
+
+19. ServerTravel로 서버 호스팅하기
+Host명령은 우리를 호스팅 서버 또는 클라이언트 서버 게임으로 우리를 데려갈 거다.
+Joining와 Hosting없이
+호스팅 방법: URL을 통해 실현된다
+/Game/ThirdPersonCPP/Maps/ThirdPersonExampleMap
+?listen ---> 
+
+20. 조인 
+PlayerController 수준에서 작동하고 ㅣㅇ동해야한다고 알려주는 clientTravel은 어떨까 ? 
+한 번에 하나만 !  
+APlayerController::ClientTravel 
+URL<- ip주소, TravelType (Absolute, Partial, Relative, MAX)
